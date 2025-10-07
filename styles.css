@@ -19,7 +19,7 @@ body {
 
 /* Header Styles */
 .header {
-  background: rgba(255, 255, 255, 0.95);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   backdrop-filter: blur(10px);
   padding: 30px 0;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -742,6 +742,18 @@ body {
   transform: translate(-50%, -50%);
   width: 100%;
   text-align: center;
+}
+
+.tagline-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.tagline-large {
+  font-size: 28px; /* ukuran lebih besar */
+  font-weight: 600;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* sedikit efek agar standout */
 }
 
 @media (max-width: 768px) {
