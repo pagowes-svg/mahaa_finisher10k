@@ -743,3 +743,17 @@ body {
   width: 100%;
   text-align: center;
 }
+
+@media (max-width: 768px) {
+  .nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav a {
+    padding: 12px;
+    width: 100%;
+    text-align: center;
+  }
+}
