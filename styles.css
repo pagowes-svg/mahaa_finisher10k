@@ -21,9 +21,9 @@ body {
 .header {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
-  padding: 30px 0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  margin-bottom: 40px;
+  padding: 15px 0; /* dari 30px → jadi lebih kecil */
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 25px; /* dari 40px → lebih rapat */
 }
 
 .logo {
@@ -56,7 +56,7 @@ body {
 .tagline {
   text-align: center;
   color: #666;
-  font-size: 50px;
+  font-size: 16px;
   font-weight: 300;
 }
 
