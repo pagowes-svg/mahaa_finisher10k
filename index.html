@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resep Finder - Makanan & Minuman</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icon">🍳</span>
+        <h1>Resep Mahaa Ganteng Slebeww</h1>
+      </div>
+      <p class="tagline">Temukan resep makanan dan minuman favoritmu!</p>
+    </div>
+  </header>
+
+  <!-- Tabs -->
+  <div class="tab-container">
+    <button id="tab-meal" class="tab active" onclick="switchTab('meal')">🍛 Makanan</button>
+    <button id="tab-drink" class="tab" onclick="switchTab('drink')">🍹 Minuman</button>
+  </div>
+
+  <!-- Search Section -->
+  <section class="search-section">
+    <div class="container">
+      <div class="search-box">
+        <div class="search-input-wrapper">
+          <span class="search-icon">🔍</span>
+          <input 
+            type="text" 
+            id="search" 
+            placeholder="Cari resep..."
+            onkeypress="if(event.key === 'Enter') searchContent()"
+          >
+        </div>
+        <button onclick="searchContent()" class="btn-search">
+          <span>Cari</span>
+        </button>
+      </div>
+      <div class="quick-search">
+        <span class="quick-label">Populer:</span>
+        <button onclick="quickSearch('chicken')" class="quick-btn">Chicken</button>
+        <button onclick="quickSearch('coffee')" class="quick-btn">Coffee</button>
+        <button onclick="quickSearch('beef')" class="quick-btn">Beef</button>
+        <button onclick="quickSearch('tea')" class="quick-btn">Tea</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Loading -->
+  <div id="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Mencari...</p>
+  </div>
+
+  <!-- Results -->
+  <section class="results-section">
+    <div class="container">
+      <div id="result-info" class="result-info"></div>
+      <div id="result" class="result-grid"></div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+ 
+    <!-- Rating Section -->
+  <section class="rating-section">
+    <div class="container">
+      <h2>Bagaimana pengalamanmu dengan Resep Mahaa Ganteng?</h2>
+      <div class="stars">
+        <span onclick="setRating(1)">⭐</span>
+        <span onclick="setRating(2)">⭐</span>
+        <span onclick="setRating(3)">⭐</span>
+        <span onclick="setRating(4)">⭐</span>
+        <span onclick="setRating(5)">⭐</span>
+      </div>
+      <p id="rating-result" class="rating-result">Beri penilaianmu di atas!</p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="container">
+      <h2>Hubungi Kami</h2>
+      <form id="contact-form" onsubmit="sendMessage(event)">
+        <input type="text" id="name" placeholder="Nama Anda" required>
+        <input type="email" id="email" placeholder="Email Anda" required>
+        <textarea id="message" placeholder="Tulis pesan Anda..." required></textarea>
+        <button type="submit" class="btn-search">Kirim Pesan</button>
+      </form>
+      <p id="form-status" class="form-status"></p>
+    </div>
+  </section>
+     
+  <!-- Social Media Section -->
+<section class="social-section">
+  <div class="container">
+    <h2>Ikuti Kami</h2>
+    <div class="social-links">
+      <!-- Facebook -->
+      <a href="https://www.facebook.com" target="_blank" class="social-btn facebook">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="white" d="M279.14 288l14.22-92.66h-88.91V131.64c0-25.35 12.42-50.06 52.24-50.06H295V6.26S259.91 0 225.36 0C141.09 0 89.09 54.42 89.09 154.69V195.3H0v92.7h89.09V512h107.77V288z"/></svg>
+        Facebook
+      </a>
+
+      <!-- Instagram -->
+      <a href="https://www.instagram.com" target="_blank" class="social-btn instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="white" d="M224,202.66A53.34,53.34,0,1,0,277.34,256,53.38,53.38,0,0,0,224,202.66Zm124.71-41a54,54,0,0,0-30.43-30.43C297,125.68,256,124,224,124s-73,1.68-94.29,7.19a54,54,0,0,0-30.43,30.43C93.68,168.94,92,209.94,92,242s1.68,73,7.19,94.29a54,54,0,0,0,30.43,30.43C151,373.68,192,375.34,224,375.34s73-1.66,94.29-7.17a54,54,0,0,0,30.43-30.43C354.32,315,356,274,356,242S354.32,168.94,348.71,161.63ZM398.8,80A79.9,79.9,0,0,1,448,129.2V382.8A79.9,79.9,0,0,1,398.8,432H49.2A79.9,79.9,0,0,1,0,382.8V129.2A79.9,79.9,0,0,1,49.2,80H398.8ZM224,338a96,96,0,1,1,96-96A96,96,0,0,1,224,338Zm146.4-193a22.4,22.4,0,1,1-22.4-22.4A22.4,22.4,0,0,1,370.4,145Z"/></svg>
+        Instagram
+      </a>
+
+      <!-- TikTok -->
+      <a href="https://www.tiktok.com" target="_blank" class="social-btn tiktok">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="white" d="M448,209.91a210.5,210.5,0,0,1-122.77-39.28V347.13A164.87,164.87,0,1,1,187,184.79v91.55a73.41,73.41,0,1,0,51.11,70.11V0h87.1A123.55,123.55,0,0,0,448,123.55Z"/></svg>
+        TikTok
+      </a>
+
+      <!-- YouTube -->
+      <a href="https://www.youtube.com" target="_blank" class="social-btn youtube">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="white" d="M549.65 124.08c-6.28-23.65-24.81-42.18-48.46-48.46C458.62 64 288 64 288 64s-170.62 0-213.19 11.62c-23.65 6.28-42.18 24.81-48.46 48.46C16.72 166.65 16.72 256 16.72 256s0 89.35 9.63 131.92c6.28 23.65 24.81 42.18 48.46 48.46C117.38 448 288 448 288 448s170.62 0 213.19-11.62c23.65-6.28 42.18-24.81 48.46-48.46C559.28 345.35 559.28 256 559.28 256s0-89.35-9.63-131.92zM232 336V176l142 80-142 80z"/></svg>
+        YouTube
+      </a>
+
+      <!-- X (formerly Twitter) -->
+      <a href="https://x.com" target="_blank" class="social-btn x">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227"><path fill="white" d="M714.163 519.284L1160.89 0H1056.37L668.58 450.887L372.468 0H0L468.301 681.821L0 1226.37H104.524L515.48 748.68L827.532 1226.37H1200L714.137 519.284H714.163ZM567.91 686.828L520.206 617.486L142.113 79.684H320.654L625.332 518.473L673.037 587.815L1056.43 1146.69H877.889L567.91 686.854V686.828Z"/></svg>
+        X
+      </a>
+    </div>
+    <p class="social-note">Jangan lewatkan resep terbaru kami di media sosial!</p>
+  </div>
+</section>
+
+ <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Resep Maha Ganteng Slebeww. Powered by TheMealDB & TheCocktailDB API</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
